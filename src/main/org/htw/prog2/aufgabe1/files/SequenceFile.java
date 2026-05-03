@@ -31,4 +31,9 @@ public class SequenceFile implements HIVFile {
         return orderedSequences.size();
     }
 
+    public boolean containsSequence(String sequence){
+
+        return getSequences().contains(sequence);
+    }
+
 }
