@@ -5,7 +5,7 @@ import org.htw.prog2.aufgabe1.files.SequenceFile;
 import org.htw.prog2.aufgabe1.readers.*;
 
 import javax.swing.*;
-import java.util.HashMap;
+
 
 public class HIVDiagnostics {
 
@@ -61,40 +61,39 @@ public class HIVDiagnostics {
     public static void main(String[] args) {
         CommandLine cli = parseOptions(args);
         if (cli == null) {
-            System.exit(1);
+            HIVDiagnosticsGUI hivDiagnosticsGUI = new HIVDiagnosticsGUI();
+            hivDiagnosticsGUI.setVisible(true);
         }
-        String referenceFileName = cli.getOptionValue('r');
-        String patientSequenceFileName = cli.getOptionValue('p');
-        String mutationFileName = cli.getOptionValue('m');
+        else {
+            String referenceFileName = cli.getOptionValue('r');
+            String patientSequenceFileName = cli.getOptionValue('p');
+            String mutationFileName = cli.getOptionValue('m');
 
-        // Add all available sequence file readers to sequenceReaderManager:
-        ReaderManager<SequenceFileReader> sequenceReaderManager = new ReaderManager<>();
-        sequenceReaderManager.addReader(new FASTAFileReader());
-        sequenceReaderManager.addReader(new FASTQFileReader());
+            // Add all available sequence file readers to sequenceReaderManager:
+            ReaderManager<SequenceFileReader> sequenceReaderManager = new ReaderManager<>();
+            sequenceReaderManager.addReader(new FASTAFileReader());
+            sequenceReaderManager.addReader(new FASTQFileReader());
 
-        // Add all available mutation file readers to mutationReaderManager:
-        ReaderManager<MutationFileReader> mutationReaderManager = new ReaderManager<>();
-        mutationReaderManager.addReader(new CSVFileReader());
+            // Add all available mutation file readers to mutationReaderManager:
+            ReaderManager<MutationFileReader> mutationReaderManager = new ReaderManager<>();
+            mutationReaderManager.addReader(new CSVFileReader());
 
-        try {
-            // Use reader managers to determine appropriate readers for all input files, and then use those
-            // readers to read the files
-            SequenceFile referencefile = sequenceReaderManager.getReaderForFile(referenceFileName).readFile(referenceFileName);
-            SequenceFile patientseqs = sequenceReaderManager.getReaderForFile(patientSequenceFileName).readFile(patientSequenceFileName);
-            MutationFile patterns = mutationReaderManager.getReaderForFile(mutationFileName).readFile(mutationFileName);
-            System.out.println("Eingelesene Mutationen: " + patterns.getNumberOfMutations());
-            System.out.println("Länge der eingelesenen Referenzsequenz: " +
-                    referencefile.getFirstSequence().length() + " Aminosäuren");
-            System.out.println("Anzahl der eingelesenen Patientensequenzen: " +
-                    patientseqs.getNumberOfSequences());
-            // Ausgabe der vorhergesagten Medikamentresistenzen
-//            System.out.println("Vorhersage der Medikamentenresistenzen:");
-//            FullLengthSequenceAnalysis analysis = new FullLengthSequenceAnalysis(referencefile.getFirstSequence(),
-//                    patientseqs, patterns);
-//            System.out.println(analysis.getDrugDescriptions());
-//            System.out.println("Recommended drug: " + analysis.getBestDrug());
-        } catch (Exception e) {
-            System.out.println("Fehler beim Einlesen einer der Dateien: " + e.getMessage());
+            try {
+                // Use reader managers to determine appropriate readers for all input files, and then use those
+                // readers to read the files
+                SequenceFile referencefile = sequenceReaderManager.getReaderForFile(referenceFileName).readFile(referenceFileName);
+                SequenceFile patientseqs = sequenceReaderManager.getReaderForFile(patientSequenceFileName).readFile(patientSequenceFileName);
+                MutationFile patterns = mutationReaderManager.getReaderForFile(mutationFileName).readFile(mutationFileName);
+
+                System.out.println("Eingelesene Mutationen: " + patterns.getNumberOfMutations());
+                System.out.println("Länge der eingelesenen Referenzsequenz: " +
+                        referencefile.getFirstSequence().length() + " Aminosäuren");
+                System.out.println("Anzahl der eingelesenen Patientensequenzen: " +
+                        patientseqs.getNumberOfSequences());
+
+            } catch (Exception e) {
+                System.out.println("Fehler beim Einlesen einer der Dateien: " + e.getMessage());
+            }
         }
     }
 }
