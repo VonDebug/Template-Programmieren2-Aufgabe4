@@ -69,6 +69,14 @@ public class HIVDiagnosticsGUI extends JFrame {
         c.anchor = GridBagConstraints.LINE_END;
         c.insets = new Insets(0, 0, 0, 30);
         add(new JButton(icon), c);
+
+
+        c.gridx = 0;
+        c.gridy = 3;
+        c.gridwidth = 2;
+        c.anchor = GridBagConstraints.LINE_END;
+        c.insets = new Insets(0, 0, 0, 30);
+        add(new JButton("Predict best drug"), c);
     }
 
 }

@@ -12,7 +12,7 @@ public class HIVDiagnostics {
     /**
      * Parst die Kommandozeilenargumente. Gibt null zurück, falls:
      * <ul>
-     *     <li>Ein Fehler beim Parsen aufgetreten ist (z.B. eins der erforderlichen Argumente nicht angegeben wurde)</li>
+     *     <li>Ein Fehler beim Parsen aufgetreten ist (z. B. eins der erforderlichen Argumente nicht angegeben wurde)</li>
      *     <li>Bei -m, -d und -r nicht die gleiche Anzahl an Argumenten angegeben wurde</li>
      * </ul>
      * @param args Array mit Kommandozeilen-Argumenten
