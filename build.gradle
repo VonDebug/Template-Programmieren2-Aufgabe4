@@ -3,6 +3,7 @@ plugins {
     id 'application'
 }
 
+
 mainClassName = 'org.htw.prog2.aufgabe1.HIVDiagnostics'
 
 tasks.withType(JavaCompile) {
@@ -23,6 +24,7 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
+
 
 sourceSets {
     main {

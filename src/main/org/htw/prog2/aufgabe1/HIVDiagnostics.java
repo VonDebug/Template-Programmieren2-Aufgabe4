@@ -59,10 +59,14 @@ public class HIVDiagnostics {
     }
 
     public static void main(String[] args) {
+
+
+
         CommandLine cli = parseOptions(args);
         if (cli == null) {
             HIVDiagnosticsGUI hivDiagnosticsGUI = new HIVDiagnosticsGUI();
             hivDiagnosticsGUI.setVisible(true);
+
         }
         else {
             String referenceFileName = cli.getOptionValue('r');
